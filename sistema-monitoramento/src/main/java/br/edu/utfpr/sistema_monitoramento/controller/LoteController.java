@@ -54,7 +54,7 @@ public class LoteController {
             return ResponseEntity.notFound().build();
         }
 
-        entity.setId(uuid);
+        //entity.setId(uuid);
         loteRepository.save(entity);
         return ResponseEntity.ok(entity);
     }

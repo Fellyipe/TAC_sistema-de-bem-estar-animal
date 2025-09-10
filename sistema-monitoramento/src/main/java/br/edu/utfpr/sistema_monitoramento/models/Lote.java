@@ -1,7 +1,5 @@
 package br.edu.utfpr.sistema_monitoramento.models;
 
-import java.util.UUID;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
