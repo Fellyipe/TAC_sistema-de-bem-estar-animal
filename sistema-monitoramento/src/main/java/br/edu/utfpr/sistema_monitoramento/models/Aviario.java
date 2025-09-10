@@ -1,28 +1,30 @@
 package br.edu.utfpr.sistema_monitoramento.models;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tb_aviarios")
-public class Aviario {
+public class Aviario extends BaseEntity {
 
-    @Id
-    private UUID id = UUID.randomUUID();
-
+    // MANTIDOS: Os campos principais da entidade
     @Column(nullable = false, unique = true)
     private String nome;
 
-    @Column(nullable = false)
+    @Column(name = "capacidade_maxima", nullable = false)
     private Integer capacidadeMaxima;
 
     @Column(nullable = false)
@@ -31,23 +33,6 @@ public class Aviario {
     @Column(nullable = false)
     private Boolean ativo;
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
-
-    @OneToMany(mappedBy = "aviario")
+    @OneToMany(mappedBy = "aviario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Lote> lotes;
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = createdAt;
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
 }
