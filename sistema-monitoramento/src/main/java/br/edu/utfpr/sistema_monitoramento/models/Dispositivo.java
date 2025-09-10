@@ -1,29 +1,24 @@
 package br.edu.utfpr.sistema_monitoramento.models;
 
-import java.util.UUID;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 
-@Entity
-@Table(name = "tb_lote")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class Lote {
+@Entity
+@Table(name = "tb_dispositivo")
+@EqualsAndHashCode(callSuper=false)
+public class Dispositivo extends BaseEntity {
 
-    @Column(nullable = false)
-    private String descricao;
+    private String serial;
+    
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "aviario_id", nullable = false)
     private Aviario aviario;
+
 }

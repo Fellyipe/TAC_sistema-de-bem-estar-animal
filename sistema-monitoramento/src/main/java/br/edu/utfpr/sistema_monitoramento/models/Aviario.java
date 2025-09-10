@@ -17,10 +17,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_aviarios")
+@Table(name = "tb_aviario")
 public class Aviario extends BaseEntity {
 
-    // MANTIDOS: Os campos principais da entidade
     @Column(nullable = false, unique = true)
     private String nome;
 

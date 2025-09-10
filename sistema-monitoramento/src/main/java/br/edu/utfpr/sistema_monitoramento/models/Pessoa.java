@@ -1,24 +1,18 @@
 package br.edu.utfpr.sistema_monitoramento.models;
 
-import java.util.UUID;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Getter
-@Setter
 @ToString
 @Entity
+@Data
+@EqualsAndHashCode(callSuper=false)
 @Table(name = "tb_person")
-public class Pessoa {
-
-    @Id
-    private UUID id = UUID.randomUUID();
+public class Pessoa extends BaseEntity {
 
     @Column(name = "name", length = 200, nullable = false)
     private String name;
