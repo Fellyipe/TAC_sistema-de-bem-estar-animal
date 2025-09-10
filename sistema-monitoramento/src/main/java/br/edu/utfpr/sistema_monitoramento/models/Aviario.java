@@ -1,11 +1,13 @@
 package br.edu.utfpr.sistema_monitoramento.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -35,9 +37,9 @@ public class Aviario {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    // Exemplo de relacionamento: um aviário pode ter várias galinhas
-    //@OneToMany(mappedBy = "aviario")
-    //private List<Galinhas> galinhas;
+    @OneToMany(mappedBy = "aviario")
+    private List<Lote> lotes;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
