@@ -11,7 +11,7 @@ import lombok.ToString;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper=false)
-@Table(name = "tb_person")
+@Table(name = "tb_pessoa")
 public class Pessoa extends BaseEntity {
 
     @Column(name = "name", length = 200, nullable = false)

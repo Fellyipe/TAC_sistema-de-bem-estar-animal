@@ -8,6 +8,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -16,7 +17,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Lote {
+@EqualsAndHashCode(callSuper=false)
+public class Lote extends BaseEntity {
 
     @Column(nullable = false)
     private String descricao;
