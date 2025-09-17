@@ -28,9 +28,8 @@ public class LoteService {
 
     public Lote save(LoteDTO dto) {
         var lote = new Lote();
-        Aviario aviario = aviarioRepository.findById(dto.aviarioId()).orElseThrow(() -> new NotFoundException("Lote com ID: " + dto.aviarioId() + " não encontrado."));
+        Aviario aviario = aviarioRepository.findById(dto.aviarioId()).orElseThrow(() -> new NotFoundException("Aviário com ID: " + dto.aviarioId() + " não encontrado."));
         BeanUtils.copyProperties(dto, lote);
-        lote.setDescricao(dto.descricao());
         lote.setAviario(aviario);
         return repository.save(lote);
     }
@@ -46,12 +45,11 @@ public class LoteService {
     }
 
     public Lote update(String id, LoteDTO dto) {
-        var loteExistente = findById(id);
-        Aviario aviario = aviarioRepository.findById(dto.aviarioId()).orElseThrow(() -> new NotFoundException("Lote com ID: " + dto.aviarioId() + " não encontrado."));
-        BeanUtils.copyProperties(dto, loteExistente, "id");
-        loteExistente.setDescricao(dto.descricao());
-        loteExistente.setAviario(aviario);
-        return repository.save(loteExistente);
+        var lote = findById(id);
+        Aviario aviario = aviarioRepository.findById(dto.aviarioId()).orElseThrow(() -> new NotFoundException("Aviário com ID: " + dto.aviarioId() + " não encontrado."));
+        BeanUtils.copyProperties(dto, lote, "id");
+        lote.setAviario(aviario);
+        return repository.save(lote);
     }
 
     public void delete(String id) {

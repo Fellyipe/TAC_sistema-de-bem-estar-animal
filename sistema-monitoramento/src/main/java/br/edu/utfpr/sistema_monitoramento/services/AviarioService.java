@@ -24,10 +24,6 @@ public class AviarioService {
     public Aviario save(AviarioDTO dto) {
         var aviario = new Aviario();
         BeanUtils.copyProperties(dto, aviario);
-        aviario.setNome(dto.nome());
-        aviario.setCapacidadeMaxima(dto.capacidadeMaxima());
-        aviario.setLocalizacao(dto.localizacao());
-        aviario.setAtivo(dto.ativo());
         return repository.save(aviario);
     }
 
@@ -38,16 +34,12 @@ public class AviarioService {
     public Aviario findById(String id) {
         UUID uuid = UUID.fromString(id);
         return repository.findById(uuid)
-                .orElseThrow(() -> new NotFoundException("Aviartio com ID: " + id + " não encontrado."));
+                .orElseThrow(() -> new NotFoundException("Aviário com ID: " + id + " não encontrado."));
     }
 
     public Aviario update(String id, AviarioDTO dto) {
         var aviarioExistente = findById(id);
         BeanUtils.copyProperties(dto, aviarioExistente, "id");
-        aviarioExistente.setNome(dto.nome());
-        aviarioExistente.setCapacidadeMaxima(dto.capacidadeMaxima());
-        aviarioExistente.setLocalizacao(dto.localizacao());
-        aviarioExistente.setAtivo(dto.ativo());
         return repository.save(aviarioExistente);
     }
 
