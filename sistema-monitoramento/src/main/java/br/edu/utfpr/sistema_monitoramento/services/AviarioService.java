@@ -28,7 +28,6 @@ public class AviarioService {
         aviario.setCapacidadeMaxima(dto.capacidadeMaxima());
         aviario.setLocalizacao(dto.localizacao());
         aviario.setAtivo(dto.ativo());
-        aviario.setLotes(dto.lotes());
         return repository.save(aviario);
     }
 
@@ -49,7 +48,6 @@ public class AviarioService {
         aviarioExistente.setCapacidadeMaxima(dto.capacidadeMaxima());
         aviarioExistente.setLocalizacao(dto.localizacao());
         aviarioExistente.setAtivo(dto.ativo());
-        aviarioExistente.setLotes(dto.lotes());
         return repository.save(aviarioExistente);
     }
 

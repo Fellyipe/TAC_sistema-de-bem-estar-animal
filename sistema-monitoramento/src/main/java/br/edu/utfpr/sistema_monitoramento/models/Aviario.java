@@ -31,7 +31,4 @@ public class Aviario extends BaseEntity {
 
     @Column(nullable = false)
     private Boolean ativo;
-
-    @OneToMany(mappedBy = "aviario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Lote> lotes;
 }
