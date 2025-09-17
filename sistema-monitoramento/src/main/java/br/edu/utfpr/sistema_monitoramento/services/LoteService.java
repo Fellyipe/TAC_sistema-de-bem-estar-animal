@@ -3,19 +3,24 @@ package br.edu.utfpr.sistema_monitoramento.services;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.edu.utfpr.sistema_monitoramento.dtos.LoteDTO;
 import br.edu.utfpr.sistema_monitoramento.exception.NotFoundException;
+import br.edu.utfpr.sistema_monitoramento.models.Aviario;
 import br.edu.utfpr.sistema_monitoramento.models.Lote;
+import br.edu.utfpr.sistema_monitoramento.repositories.AviarioRepository;
 import br.edu.utfpr.sistema_monitoramento.repositories.LoteRepository;
 
 @Service
 public class LoteService {
 
     private final LoteRepository repository;
+    @Autowired
+    private AviarioRepository aviarioRepository;
 
     public LoteService(LoteRepository repository) {
         this.repository = repository;
@@ -23,9 +28,10 @@ public class LoteService {
 
     public Lote save(LoteDTO dto) {
         var lote = new Lote();
+        Aviario aviario = aviarioRepository.findById(dto.aviarioId()).orElseThrow(() -> new NotFoundException("Lote com ID: " + dto.aviarioId() + " não encontrado."));
         BeanUtils.copyProperties(dto, lote);
         lote.setDescricao(dto.descricao());
-        lote.setAviario(dto.aviario());
+        lote.setAviario(aviario);
         return repository.save(lote);
     }
 
@@ -41,9 +47,10 @@ public class LoteService {
 
     public Lote update(String id, LoteDTO dto) {
         var loteExistente = findById(id);
+        Aviario aviario = aviarioRepository.findById(dto.aviarioId()).orElseThrow(() -> new NotFoundException("Lote com ID: " + dto.aviarioId() + " não encontrado."));
         BeanUtils.copyProperties(dto, loteExistente, "id");
         loteExistente.setDescricao(dto.descricao());
-        loteExistente.setAviario(dto.aviario());
+        loteExistente.setAviario(aviario);
         return repository.save(loteExistente);
     }
 
