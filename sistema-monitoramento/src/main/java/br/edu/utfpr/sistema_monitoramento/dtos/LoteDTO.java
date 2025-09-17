@@ -1,7 +1,7 @@
 package br.edu.utfpr.sistema_monitoramento.dtos;
 
-import br.edu.utfpr.sistema_monitoramento.models.Aviario;
+import java.util.UUID;
 
-public record LoteDTO(String descricao, Aviario aviario) {
+public record LoteDTO(String descricao, UUID aviarioId) {
 
 }
