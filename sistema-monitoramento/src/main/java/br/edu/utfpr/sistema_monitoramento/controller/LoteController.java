@@ -1,72 +1,45 @@
 package br.edu.utfpr.sistema_monitoramento.controller;
 
-import java.util.List;
-import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
+import br.edu.utfpr.sistema_monitoramento.dtos.LoteDTO;
 import br.edu.utfpr.sistema_monitoramento.models.Lote;
-import br.edu.utfpr.sistema_monitoramento.repositories.LoteRepository;
-import lombok.Getter;
-import lombok.Setter;
+import br.edu.utfpr.sistema_monitoramento.services.LoteService;
 
-@Getter
-@Setter
 @RestController
 @RequestMapping("/lotes")
 public class LoteController {
 
-    @Autowired
-    private LoteRepository loteRepository;
+    private final LoteService service;
 
-    @GetMapping
-    public List<Lote> getLotes() {
-        return loteRepository.findAll();
-    }
-
-    @GetMapping("/{loteId}")
-    public ResponseEntity<Lote> getLoteById(@PathVariable String loteId) {
-        var uuid = UUID.fromString(loteId);
-        var result = loteRepository.findById(uuid);
-
-        return result.isPresent() ? ResponseEntity.ok(result.get()) : ResponseEntity.notFound().build();
+    public LoteController(LoteService service) {
+        this.service = service;
     }
 
     @PostMapping
-    public Lote create(@RequestBody Lote entity) {
-        loteRepository.save(entity);
-        return entity;
+    public Lote save(@RequestBody LoteDTO dto) {
+        return service.save(dto);
     }
 
-    @PutMapping("/{loteId}")
-    public ResponseEntity<Lote> update(@PathVariable String loteId, @RequestBody Lote entity) {
-        var uuid = UUID.fromString(loteId);
-        if (!loteRepository.existsById(uuid)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        //entity.setId(uuid);
-        loteRepository.save(entity);
-        return ResponseEntity.ok(entity);
+    @PutMapping("/{id}")
+    public Lote update(@PathVariable String id, @RequestBody LoteDTO dto) {
+        return service.update(id, dto);
     }
 
-    @DeleteMapping("/{loteId}")
-    public ResponseEntity<Void> delete(@PathVariable String loteId) {
-        var uuid = UUID.fromString(loteId);
-        if (!loteRepository.existsById(uuid)) {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping
+    public Page<Lote> findAll(
+            @RequestParam(defaultValue = "0") int pagina,
+            @RequestParam(defaultValue = "10") int tamanho) {
+        return service.findAll(pagina, tamanho);
+    }
 
-        loteRepository.deleteById(uuid);
-        return ResponseEntity.noContent().build();
+    @GetMapping("/{id}")
+    public Lote findById(@PathVariable String id) {
+        return service.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String id) {
+        service.delete(id);
     }
 }

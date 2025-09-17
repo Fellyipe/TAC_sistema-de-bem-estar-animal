@@ -2,39 +2,39 @@ package br.edu.utfpr.sistema_monitoramento.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-import br.edu.utfpr.sistema_monitoramento.dtos.AviarioDTO;
-import br.edu.utfpr.sistema_monitoramento.models.Aviario;
-import br.edu.utfpr.sistema_monitoramento.services.AviarioService;
+import br.edu.utfpr.sistema_monitoramento.dtos.SensorDTO;
+import br.edu.utfpr.sistema_monitoramento.models.Sensor;
+import br.edu.utfpr.sistema_monitoramento.services.SensorService;
 
 @RestController
-@RequestMapping("/aviarios")
-public class AviarioController {
+@RequestMapping("/sensores")
+public class SensorController {
 
-    private final AviarioService service;
+    private final SensorService service;
 
-    public AviarioController(AviarioService service) {
+    public SensorController(SensorService service) {
         this.service = service;
     }
 
     @PostMapping
-    public Aviario save(@RequestBody AviarioDTO dto) {
+    public Sensor save(@RequestBody SensorDTO dto) {
         return service.save(dto);
     }
 
     @PutMapping("/{id}")
-    public Aviario update(@PathVariable String id, @RequestBody AviarioDTO dto) {
+    public Sensor update(@PathVariable String id, @RequestBody SensorDTO dto) {
         return service.update(id, dto);
     }
 
     @GetMapping
-    public Page<Aviario> findAll(
+    public Page<Sensor> findAll(
             @RequestParam(defaultValue = "0") int pagina,
             @RequestParam(defaultValue = "10") int tamanho) {
         return service.findAll(pagina, tamanho);
     }
 
     @GetMapping("/{id}")
-    public Aviario findById(@PathVariable String id) {
+    public Sensor findById(@PathVariable String id) {
         return service.findById(id);
     }
 
