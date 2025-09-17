@@ -1,9 +1,14 @@
 package br.edu.utfpr.sistema_monitoramento.dtos;
 
-import java.util.List;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
-import br.edu.utfpr.sistema_monitoramento.models.Lote;
-
-public record AviarioDTO(String nome, Integer capacidadeMaxima, String localizacao, Boolean ativo) {
+public record AviarioDTO(
+    @NotBlank(message = "Não pode ser vazio") @Size(max = 255) String nome, 
+    @NotNull(message = "Não pode ser nulo") @Positive Integer capacidadeMaxima, 
+    @NotBlank(message = "Não pode ser vazio") @Size(max = 255) String localizacao, 
+    @NotNull(message = "Não pode ser vazio") Boolean ativo) {
 
 }
