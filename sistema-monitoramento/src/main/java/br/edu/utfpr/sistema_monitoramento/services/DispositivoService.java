@@ -3,13 +3,16 @@ package br.edu.utfpr.sistema_monitoramento.services;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.edu.utfpr.sistema_monitoramento.dtos.DispositivoDTO;
 import br.edu.utfpr.sistema_monitoramento.exception.NotFoundException;
+import br.edu.utfpr.sistema_monitoramento.models.Aviario;
 import br.edu.utfpr.sistema_monitoramento.models.Dispositivo;
+import br.edu.utfpr.sistema_monitoramento.repositories.AviarioRepository;
 import br.edu.utfpr.sistema_monitoramento.repositories.DispositivoRepository;
 
 @Service
@@ -17,16 +20,18 @@ public class DispositivoService {
 
     private final DispositivoRepository repository;
 
+    @Autowired
+    private AviarioRepository aviarioRepo;
+
     public DispositivoService(DispositivoRepository repository) {
         this.repository = repository;
     }
 
     public Dispositivo save(DispositivoDTO dto) {
-        var dispositivo = new Dispositivo();
+        Dispositivo dispositivo = new Dispositivo();
+        Aviario aviario = aviarioRepo.findById(dto.aviarioId()).orElseThrow(() -> new NotFoundException("Aviário com ID: " + dto.aviarioId() + " não encontrado."));
         BeanUtils.copyProperties(dto, dispositivo);
-        dispositivo.setSerial(dto.serial());
-        dispositivo.setStatus(dto.Status());
-        dispositivo.setAviario(dto.aviario());
+        dispositivo.setAviario(aviario);
         return repository.save(dispositivo);
     }
 
@@ -41,12 +46,11 @@ public class DispositivoService {
     }
 
     public Dispositivo update(String id, DispositivoDTO dto) {
-        var dispositivoExistente = findById(id);
-        BeanUtils.copyProperties(dto, dispositivoExistente, "id");
-        dispositivoExistente.setSerial(dto.serial());
-        dispositivoExistente.setStatus(dto.Status());
-        dispositivoExistente.setAviario(dto.aviario());
-        return repository.save(dispositivoExistente);
+        var dispositivo = findById(id);
+        Aviario aviario = aviarioRepo.findById(dto.aviarioId()).orElseThrow(() -> new NotFoundException("Aviário com ID: " + dto.aviarioId() + " não encontrado."));
+        BeanUtils.copyProperties(dto, dispositivo, "id");
+        dispositivo.setAviario(aviario);
+        return repository.save(dispositivo);
     }
 
     public void delete(String id) {
