@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import br.edu.utfpr.sistema_monitoramento.dtos.AviarioDTO;
 import br.edu.utfpr.sistema_monitoramento.models.Aviario;
 import br.edu.utfpr.sistema_monitoramento.services.AviarioService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/aviarios")
@@ -17,7 +18,7 @@ public class AviarioController {
     }
 
     @PostMapping
-    public Aviario save(@RequestBody AviarioDTO dto) {
+    public Aviario save(@Valid @RequestBody AviarioDTO dto) {
         return service.save(dto);
     }
 
