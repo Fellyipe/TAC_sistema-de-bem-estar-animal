@@ -15,10 +15,10 @@ import io.swagger.v3.oas.annotations.servers.Server;
 // Configurações gerais da API
 @OpenAPIDefinition(
   info =@Info(
-    title = "Lembretes API",
+    title = "Sistema de Monitoramento API",
     version = "${api.version}",
     contact = @Contact(
-      name = "Ricardo Sobjak", email = "ricardosobjak@utfpr.edu.br", url = "https://portal.utfpr.edu.br"
+      name = "Hornet", email = "hor@net", url = "https://silksong.hor.net"
     ),
     license = @License(
       name = "Apache 2.0", url = "https://www.apache.org/licenses/LICENSE-2.0"
