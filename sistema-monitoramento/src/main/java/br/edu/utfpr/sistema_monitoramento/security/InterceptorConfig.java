@@ -1,4 +1,4 @@
-package br.edu.utfpr.tac.cognito.security;
+package br.edu.utfpr.sistema_monitoramento.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

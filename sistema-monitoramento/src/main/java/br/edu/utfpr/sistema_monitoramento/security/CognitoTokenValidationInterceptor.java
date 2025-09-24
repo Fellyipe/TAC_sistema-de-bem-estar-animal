@@ -1,4 +1,4 @@
-package br.edu.utfpr.tac.cognito.security;
+package br.edu.utfpr.sistema_monitoramento.security;
 
 import java.security.PublicKey;
 import java.security.interfaces.RSAPublicKey;
