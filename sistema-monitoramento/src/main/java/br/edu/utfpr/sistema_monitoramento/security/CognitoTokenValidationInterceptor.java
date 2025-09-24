@@ -19,7 +19,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,7 +37,7 @@ public class CognitoTokenValidationInterceptor implements HandlerInterceptor {
 
     private final Map<String, PublicKey> publicKeyCache = new java.util.HashMap<>();
     private final RestTemplate restTemplate = new RestTemplate();
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    /// private final ObjectMapper objectMapper = new ObjectMapper();
 
     private PublicKey getPublicKey(String keyId) {
         System.out.println("Buscando chave pública para o kid: " + keyId);
