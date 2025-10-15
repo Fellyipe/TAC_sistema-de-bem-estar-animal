@@ -1,9 +1,35 @@
 @URL=http://localhost:3000/leituras
 
-### CRIAR LEITURA
+### CREATE
 POST {{URL}}
+Authorization: 123123
 Content-Type: application/json
 
 {
-    "idSensor": "Jeca",
+    "idSensor": "123456789",
+    "tipoSensor": "temperatura",
+    "leitura": "22 °C"
 }
+
+### GET ALL
+GET {{URL}}
+Authorization: 123123
+
+### GET BY ID
+GET {{URL}}/68dd655db11d3a949a5704a7
+Authorization: 123123
+
+### UPDATE
+PUT {{URL}}/68efdf7f0223b60b826b9d5c
+Authorization: 123123
+Content-Type: application/json
+
+{
+    "idSensor": "123456789",
+    "tipoSensor": "temperatura",
+    "leitura": "22.5 °C"
+}
+
+### DELETE 
+DELETE {{URL}}/68efdf4c0223b60b826b9d58
+Authorization: 123123
