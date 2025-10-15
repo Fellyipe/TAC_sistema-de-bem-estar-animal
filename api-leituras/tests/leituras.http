@@ -1,0 +1,9 @@
+@URL=http://localhost:3000/leituras
+
+### CRIAR LEITURA
+POST {{URL}}
+Content-Type: application/json
+
+{
+    "idSensor": "Jeca",
+}
