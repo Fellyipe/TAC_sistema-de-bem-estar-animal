@@ -6,9 +6,9 @@ Authorization: 123123
 Content-Type: application/json
 
 {
-    "idSensor": "123456789",
+    "idSensor": "1111111",
     "tipoSensor": "temperatura",
-    "leitura": "22 °C"
+    "leitura": "20 °C"
 }
 
 ### GET ALL
@@ -16,20 +16,20 @@ GET {{URL}}
 Authorization: 123123
 
 ### GET BY ID
-GET {{URL}}/68dd655db11d3a949a5704a7
+GET {{URL}}/68efe898e8562b397015b968
 Authorization: 123123
 
 ### UPDATE
-PUT {{URL}}/68efdf7f0223b60b826b9d5c
+PUT {{URL}}/68efe898e8562b397015b968
 Authorization: 123123
 Content-Type: application/json
 
 {
     "idSensor": "123456789",
     "tipoSensor": "temperatura",
-    "leitura": "22.5 °C"
+    "leitura": "32.5 °C"
 }
 
 ### DELETE 
-DELETE {{URL}}/68efdf4c0223b60b826b9d58
+DELETE {{URL}}/68efe898e8562b397015b968
 Authorization: 123123
